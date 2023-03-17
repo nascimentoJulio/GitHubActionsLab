@@ -3,11 +3,14 @@ run-name: ${{ github.actor }} running node app
 on: [push]
 jobs:
   #job
-  install-dependencies:
+  run-unit-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
       - run: npm install
+      - run: npm test
+
+     
   
