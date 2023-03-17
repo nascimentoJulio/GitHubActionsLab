@@ -2,11 +2,13 @@ name: Node App Pipeline
 run-name: ${{ github.actor }} running node app
 on: [push]
 jobs:
-  #job
-  UnitTests:
+  Quality:
+    name: SonarCloud
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
@@ -15,13 +17,6 @@ jobs:
         run: npm install
       - name: Unit Tests
         run: npm test
-  Sonar:
-    name: SonarCloud
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
