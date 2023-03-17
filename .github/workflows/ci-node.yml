@@ -3,9 +3,10 @@ run-name: ${{ github.actor }} running node app
 on: [push]
 jobs:
   #job
-  run-unit-test:
+  run:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/setup-node@v3
       - uses: ./
         with:
           node-version: '14'
